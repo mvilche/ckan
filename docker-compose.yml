@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  ckan:
+    build:
+     context: Dockerfiles
+     dockerfile: Dockerfile
+    image: mvilche/ckan:2.8.2
+    volumes:
+     - $PWD/ckan:/opt/app/ckan
+    env_file:
+     - Config.env
+    ports:
+     - "8182:8070"
+    networks:
+     - integracion
+
+  solr:
+    image: solr:7-alpine
+    networks:
+     - integracion
+
+
+  redis:
+    image: redis
+    networks:
+     - integracion
+
+  postgres:
+    image: postgres:10
+    environment:
+     - POSTGRES_PASSWORD=password
+     - POSTGRES_USER=ckan
+    ports:
+     - "5432:5432"
+    volumes:
+     - $PWD/database:/var/lib/postgresql/data
+    networks:
+     - integracion
+
+
+networks:
+  integracion:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+         - subnet: 142.8.0.0/16
+
