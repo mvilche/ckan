@@ -24,7 +24,7 @@ docker-compose up
 
 | Directorio | Detalle |
 | ------ | ------ |
-| /opt/app/ckan | Directorio raiz |
+| /opt/app | Directorio raiz |
 
 
 ### Variables
