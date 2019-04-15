@@ -50,9 +50,9 @@ fi
 
 
 
-    if [ -z $POSTGRES_HOST ] || [ -z $POSTGRES_USER ] || [ -z $POSTGRES_PASSWORD ] || [ -z $POSTGRES_PORT ] || [ -z $CKAN_URL ] || [ -z $CKAN_REDIS_URL ] || [ -z $CKAN_SOLR_URL ] || [ -z $CKAN_DATAPUSHER_URL ]; then
+    if [ -z $POSTGRES_HOST ] || [ -z $POSTGRES_USER ] || [ -z $POSTGRES_PASSWORD ] || [ -z $POSTGRES_PORT ] || [ -z $CKAN_URL ] || [ -z $CKAN_REDIS_URL ] || [ -z $CKAN_SOLR_URL ]; then
     echo "***************************************************"
-    echo "SE DETECTARON VARIABLES REQUERIDAS NO SETEADAS, VERIFICAR POSTGRES_USER, POSTGRES_ PASSWORD, POSTGRES_HOST, POSTGRES_PORT, CKAN_URL, CKAN_REDIS_URL, CKAN_SOLR_URL, CKAN_DATAPUSHER_URL"
+    echo "SE DETECTARON VARIABLES REQUERIDAS NO SETEADAS, VERIFICAR POSTGRES_USER, POSTGRES_ PASSWORD, POSTGRES_HOST, POSTGRES_PORT, CKAN_URL, CKAN_REDIS_URL, CKAN_SOLR_URL"
     echo "*******************************************************"
     exit 1
     fi
@@ -78,7 +78,6 @@ else
     sed -i "/ckan.storage_path/c\ckan.storage_path=/opt/app/ckan/data" /opt/app/ckan/config/production.ini && \
     sed -i "/ckan.redis.url/c\ckan.redis.url=$CKAN_REDIS_URL" /opt/app/ckan/config/production.ini && \ 
     sed -i "/solr_url/c\solr_url=$CKAN_SOLR_URL" /opt/app/ckan/config/production.ini && \
-    sed -i "/ckan.datapusher.url/c\ckan.datapusher.url=$CKAN_DATAPUSHER_URL" /opt/app/ckan/config/production.ini && \
     cp /opt/app/ckan/who.ini /opt/app/ckan/config/ || exit 1
 
     echo "INICIALIZANDO BASE DE DATOS..." && \

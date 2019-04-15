@@ -5,7 +5,7 @@ pip install --upgrade pip && pip install setuptools==36.1 && cd /tmp && pip inst
 addgroup -S ckan && adduser -h /opt/app -S -G ckan ckan && \
 rm -rf /tmp/src/ckan /var/cache/apk/*
 WORKDIR /opt/app
-EXPOSE 8070
+EXPOSE 5000
 COPY run.sh /usr/bin/run.sh
 ENTRYPOINT ["/usr/bin/run.sh"]
 CMD ["/opt/app/ckan/config/production.ini"]
