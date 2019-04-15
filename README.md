@@ -1,4 +1,4 @@
-# CKAN source Docker images
+# CKAN Source Docker images
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -6,7 +6,6 @@
 # Funcionalidades:
 
   - Permite definir la zona horaria al iniciar el servicio
-  - Permite definir parametros de JAVA al iniciar el servicio
   - Permite definir el id del usuario que iniciará el contenedor
   - Non-root
   - Openshift compatible
@@ -17,7 +16,7 @@
 Ejecutar para iniciar el servicio
 
 ```sh
-
+docker-compose up
 ```
 
 ### Persistencia de datos
@@ -41,7 +40,11 @@ Ejecutar para iniciar el servicio
 | POSTGRES_PASSWORD | Contraseña servidor postgres |
 | POSTGRES_PORT | Puerto servidor postgres |
 | PULL_NEW_CHANGES | Realiza un pull al repositorio oficial de odoo previo al inciiar (true or false) |
-| CHECK_REQUIREMENTS | Ejecuta requirements.txt previo al iniciar (true or false) |
+| CKAN_URL | Ckan host url |
+| CKAN_REDIS_URL | Redis host url |
+| CKAN_SOLR_URL | Solr host url |
+| CKAN_DATAPUSHER_URL | Datapusher host url |
+
 
 License
 ----
