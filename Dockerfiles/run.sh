@@ -50,9 +50,9 @@ fi
 
 
 
-    if [ -z $POSTGRES_HOST ] || [ -z $POSTGRES_USER ] || [ -z $POSTGRES_PASSWORD ] || [ -z $POSTGRES_PORT ] || [ -z $CKAN_URL ] || [ -z $CKAN_REDIS_URL ] || [ -z $CKAN_SOLR_URL ] || [ -z $CKAN_DATAPUSHER_URL ]; then
+if [ -z $POSTGRES_HOST ] || [ -z $POSTGRES_USER ] || [ -z $POSTGRES_PASSWORD ] || [ -z $POSTGRES_PORT ] || [ -z $CKAN_URL ] || [ -z $CKAN_REDIS_URL ] || [ -z $CKAN_SOLR_URL ] || [ -z $CKAN_DATAPUSHER_URL ] || [ -z $POSTGRES_DB ]; then
     echo "***************************************************"
-    echo "SE DETECTARON VARIABLES REQUERIDAS NO SETEADAS, VERIFICAR POSTGRES_USER, POSTGRES_ PASSWORD, POSTGRES_HOST, POSTGRES_PORT, CKAN_URL, CKAN_REDIS_URL, CKAN_SOLR_URL, CKAN_DATAPUSHER_URL"
+    echo "SE DETECTARON VARIABLES REQUERIDAS NO SETEADAS, VERIFICAR POSTGRES_USER, POSTGRES_ PASSWORD, POSTGRES_HOST, POSTGRES_PORT, CKAN_URL, CKAN_REDIS_URL, CKAN_SOLR_URL, CKAN_DATAPUSHER_URL, POSTGRES_DB"
     echo "*******************************************************"
     exit 1
     fi
@@ -73,7 +73,7 @@ else
     cd /opt/app/ckan && pip install -r requirements.txt  && mkdir /opt/app/ckan/.init /opt/app/ckan/config || exit 1
 
     paster make-config ckan /opt/app/ckan/config/production.ini && \
-    sed -i "/sqlalchemy.url/c\sqlalchemy.url = postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST/\ckan" /opt/app/ckan/config/production.ini && \
+    sed -i "/sqlalchemy.url/c\sqlalchemy.url = postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST\/$POSTGRES_DB" /opt/app/ckan/config/production.ini && \
     sed -i "/ckan.site_url/c\ckan.site_url=$CKAN_URL" /opt/app/ckan/config/production.ini && \
     sed -i "/ckan.storage_path/c\ckan.storage_path=/opt/app/ckan/data" /opt/app/ckan/config/production.ini && \
     sed -i "/ckan.redis.url/c\ckan.redis.url=$CKAN_REDIS_URL" /opt/app/ckan/config/production.ini && \ 

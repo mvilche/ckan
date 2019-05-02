@@ -41,9 +41,8 @@ services:
 
   postgres:
     image: postgres:10
-    environment:
-     - POSTGRES_PASSWORD=password
-     - POSTGRES_USER=ckan
+    env_file:
+     - Config.env
     volumes:
      - $PWD/database:/var/lib/postgresql/data
     networks:
@@ -56,6 +55,6 @@ networks:
       ipam:
         driver: default
         config:
-         - subnet: 142.8.0.0/16
+         - subnet: 142.78.0.0/16
 volumes:
  solr_data:
